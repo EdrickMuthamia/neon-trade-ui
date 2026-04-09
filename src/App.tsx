@@ -24,7 +24,10 @@ import TradingPanel from './components/trading/TradingPanel';
 import BotControl from './components/bot/BotControl';
 import TradeHistory from './components/dashboard/TradeHistory';
 import Auth from './components/auth/Auth';
-import { Toaster, toast } from 'sonner';
+import { Toaster } from 'sonner';
+
+const LOGO_PRIMARY = "https://storage.googleapis.com/dala-prod-public-storage/attachments/ba8890c2-fbd6-4a2f-8641-274d87d32c48/1775692109887_IMG-20260403-WA0026.jpg";
+const LOGO_SECONDARY = "https://storage.googleapis.com/dala-prod-public-storage/attachments/ba8890c2-fbd6-4a2f-8641-274d87d32c48/1775692109888_IMG-20260403-WA0025.jpg";
 
 const App: React.FC = () => {
   const { user, setUser, setMarketData, marketData, isDemoMode } = useStore();
@@ -61,10 +64,14 @@ const App: React.FC = () => {
     return (
       <>
         <Toaster position="top-right" theme="dark" richColors />
-        <Auth onLogin={(userData) => {
-          setUser(userData);
-          setIsAuthenticated(true);
-        }} />
+        <Auth 
+          logoUrl={LOGO_PRIMARY}
+          secondaryLogoUrl={LOGO_SECONDARY}
+          onLogin={(userData) => {
+            setUser(userData);
+            setIsAuthenticated(true);
+          }} 
+        />
       </>
     );
   }
@@ -79,10 +86,17 @@ const App: React.FC = () => {
           isSidebarOpen ? 'w-64' : 'w-20'
         } hidden md:flex flex-col`}
       >
-        <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/20">
-            <Zap className="w-6 h-6 text-white" />
-          </div>
+        <div className="p-4 flex items-center gap-3">
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center bg-black border border-gray-800"
+          >
+            <img 
+              src={LOGO_PRIMARY} 
+              alt="DTTool Logo" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
           {isSidebarOpen && (
             <motion.h1 
               initial={{ opacity: 0 }}
@@ -113,8 +127,8 @@ const App: React.FC = () => {
 
         <div className="p-4 border-t border-gray-800">
           <div className="flex items-center gap-3 px-2 py-3 bg-gray-800/20 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold">
-              {user?.username.charAt(0)}
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold uppercase overflow-hidden">
+               {user?.username ? user.username.charAt(0) : <UserIcon className="w-4 h-4" />}
             </div>
             {isSidebarOpen && (
               <div className="overflow-hidden">
@@ -221,16 +235,21 @@ const App: React.FC = () => {
                   <div className="space-y-8">
                     <TradingPanel />
                     <BotControl />
-                    <div className="bg-gradient-to-br from-blue-600/20 to-cyan-500/20 border border-blue-500/20 rounded-2xl p-6 relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-blue-600/20 to-cyan-500/20 border border-blue-500/20 rounded-2xl p-6 relative overflow-hidden group">
                        <div className="relative z-10">
-                        <h4 className="text-lg font-bold mb-2">Upgrade DTTool</h4>
+                        <div className="flex items-center gap-3 mb-4">
+                           <div className="w-10 h-10 rounded-lg overflow-hidden bg-black border border-blue-500/30">
+                              <img src={LOGO_SECONDARY} alt="Market" className="w-full h-full object-cover" />
+                           </div>
+                           <h4 className="text-lg font-bold">DTTool Pro</h4>
+                        </div>
                         <p className="text-sm text-gray-400 mb-4">Unlock advanced bot strategies and higher leverage limits.</p>
-                        <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors">
+                        <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors shadow-lg shadow-blue-900/40">
                           Go Premium
                         </button>
                        </div>
-                       <div className="absolute top-0 right-0 p-4 opacity-20">
-                         <Zap className="w-12 h-12 text-blue-500" />
+                       <div className="absolute -right-2 -bottom-2 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                         <img src={LOGO_SECONDARY} alt="" className="w-24 h-24 object-cover rotate-12" />
                        </div>
                     </div>
                   </div>
@@ -343,7 +362,16 @@ const App: React.FC = () => {
                 className="max-w-3xl mx-auto space-y-8"
               >
                 <div className="bg-[#1a1b1e] border border-gray-800 rounded-2xl p-8">
-                  <h3 className="text-xl font-bold mb-6">Account Settings</h3>
+                  <div className="flex items-center gap-6 mb-10">
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-gray-800 bg-black">
+                       <img src={LOGO_PRIMARY} alt="Avatar" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                       <h3 className="text-2xl font-bold">Account Settings</h3>
+                       <p className="text-gray-500">Manage your DTTool profile and security preferences.</p>
+                    </div>
+                  </div>
+                  
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">

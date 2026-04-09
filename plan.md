@@ -1,61 +1,32 @@
-## DTTool Fintech Application Plan
+# DTTool Branding Integration Plan
 
-This document outlines the plan for building the DTTool production-ready fintech web application.
+This plan outlines the steps to integrate the provided logos into the DTTool fintech application.
 
-**1. Project Setup & Initial Structure:**
-    *   Create a `plan.md` file outlining the project structure and features.
-    *   Define the main folder structure: `dttool-platform/client/`, `dttool-platform/server/`.
-    *   Set up a Node.js backend with Express.
+## Goals
+1. Integrate the primary branding logo (IMG-20260403-WA0026.jpg).
+2. Integrate the secondary neon market-themed logo (IMG-20260403-WA0025.jpg).
+3. Ensure the logos are placed strategically in the UI (Header, Dashboard, and Loading states).
+4. Maintain the dark theme with neon accents as per the original project vision.
 
-**2. Backend Development (Node.js - Express):**
-    *   Implement JWT authentication for user security.
-    *   Set up secure environment variables for API keys and database credentials.
-    *   Define database models for `users`, `trades`, `botSettings`, and `transactions`.
-    *   Create API endpoints for:
-        *   User authentication (signup, login).
-        *   Dashboard data (balance, P/L, trade history).
-        *   Manual trading (`POST /trade`).
-        *   Bot trading management (start/stop, strategy selection).
-        *   Settings configuration.
-    *   Develop the bot trading engine:
-        *   Implement interval-based fetching of market data from Binance (public API).
-        *   Implement Moving Average crossover and RSI-based strategies.
-        *   Integrate risk level selection.
-        *   Store bot-executed trades.
-    *   Create a service layer (`services/exchangeService.js`) for exchange API integrations, initially simulating calls.
+## Tasks
+1. **Logo Placement**:
+   - Primary Logo (IMG-20260403-WA0026.jpg - "TRADER" with Bull/Bear): 
+     - Use in the Sidebar/Header as the main brand identity.
+     - Use in the Login/Auth screen as the hero image.
+   - Secondary Logo (IMG-20260403-WA0025.jpg - Neon Candlesticks):
+     - Use in the Dashboard header or as a decorative element in the "Market Overview" section.
+     - Use as a loading spinner placeholder or small icon in the navigation.
 
-**3. Frontend Development (React - Vite):**
-    *   Set up the frontend with Vite and Tailwind CSS.
-    *   Implement a dark theme with neon green and red accents.
-    *   Build UI components for:
-        *   Authentication pages (Login, Signup).
-        *   User Dashboard (balance, P/L, trade history).
-        *   Manual Trading Module (asset selection, buy/sell forms, stop loss/take profit inputs).
-        *   Bot Trading Module (toggle, strategy selection, risk level).
-        *   Settings Page.
-    *   Integrate a TradingView chart widget for market data visualization.
-    *   Implement state management (Context API or Zustand).
-    *   Ensure a responsive and clean fintech UI.
+2. **File Updates**:
+   - `src/App.tsx`: Update the sidebar/header section to include the primary logo.
+   - `src/components/auth/Auth.tsx`: Add the primary logo to the authentication forms.
+   - Create a `src/components/common/Logo.tsx` component for reusable branding.
 
-**4. Database Integration:**
-    *   Choose between Firebase or MongoDB for database persistence. (The Supabase Engineer will be consulted if database migration or edge functions are required).
+3. **Styling**:
+   - Use Tailwind CSS for responsive sizing and positioning.
+   - Ensure the logos blend well with the existing black background and neon green/red color palette.
 
-**5. Security:**
-    *   Implement input validation on all API endpoints.
-    *   Structure for future encryption of API keys.
-    *   Ensure HTTPS-ready configuration.
-
-**6. Testing & Refinement:**
-    *   Initially simulate all trading actions.
-    *   Structure code for seamless integration with real exchange APIs.
-    *   Thoroughly test all features and ensure a smooth user experience.
-
-**Agent Assignments:**
-*   **Frontend Engineer:** Will handle all UI components, user interfaces, and visual elements. This includes setting up the React frontend, Tailwind CSS, and integrating TradingView charts.
-*   **Backend Engineer:** Will handle the Node.js backend, API development, JWT authentication, bot trading logic, and database interactions (excluding migrations and edge functions, which would be Supabase Engineer's role if applicable).
-*   **Supabase Engineer:** Will be consulted *only if* database migrations or edge functions become necessary. For this initial plan, direct Supabase involvement is not assumed.
-
-**Next Steps:**
-The Frontend Engineer will be tasked with generating images and then proceeding with the UI implementation based on this plan. The Backend Engineer will set up the server structure and API foundations.
-        
-        
+4. **Assets**:
+   - Use the provided public URLs for the images:
+     - Primary: https://storage.googleapis.com/dala-prod-public-storage/attachments/ba8890c2-fbd6-4a2f-8641-274d87d32c48/1775692109887_IMG-20260403-WA0026.jpg
+     - Secondary: https://storage.googleapis.com/dala-prod-public-storage/attachments/ba8890c2-fbd6-4a2f-8641-274d87d32c48/1775692109888_IMG-20260403-WA0025.jpg
